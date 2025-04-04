@@ -17,6 +17,7 @@ def bilddaten(image):
 
 
 bilddaten(image)
+# Bildhöhe:489 Bildbreite:640
 
 
 #teilaufgabe b mittelwert der bildintensoitäten
@@ -27,3 +28,24 @@ def mittelwert(image):
 
 
 mittelwert(image)
+# Mittelwert: 196.69835
+
+
+# teilaufgabe c intensitätshistogramm
+def histo_intesity(image):
+    # histo berechnen
+    histo, bins = np.histogram(image, bins=256, range=(0, 256))
+    # plotten des histo
+    plt.figure(figsize=(8, 5))
+    plt.bar(bins[:-1], histo, color='green', width=1)
+    plt.plot(histo, color='green')
+    plt.title("Intensitätshistogramm")
+    plt.xlabel("Pixelwert")
+    plt.ylabel("Anzahl der Pixel")
+    plt.show()
+
+histo_intesity(image)
+
+# teilaufgabe d
+# sinvoller schwellwert : 190 (ca. zwischen 180 und 200)
+# Histogrammtyp: bimodales histogramm
