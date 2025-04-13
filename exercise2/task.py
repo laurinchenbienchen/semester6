@@ -41,7 +41,6 @@ def local_threshilding(image, block_size):
     image = skimage.exposure.equalize_adapthist(image)
     image = skimage.filters.median(image)
 
-
     result = np.zeros_like(image, dtype=np.uint8)
 
     for i in range (0,h,block_size):
