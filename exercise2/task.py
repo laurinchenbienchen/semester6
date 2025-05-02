@@ -58,17 +58,13 @@ def local_threshilding_objects(image, block_size):
 
     return result
 
-def local_thresholding_wdg(image, block_size):
+def local_thresholding_wdg(image, block_size, contrast_threshold=0.6):
     image = skimage.color.rgb2gray(image)
-    print(type(image))
-    print(image.shape)
-    print(image.ndim)
     h, w = image.shape
 
     image = skimage.exposure.equalize_adapthist(image)
-    #image = skimage.filters.gaussian(image, sigma=1.8)
     image = skimage.filters.median(image)
-
+    # kanten
     result = np.zeros_like(image, dtype=np.uint8)
 
     for i in range(0, h, block_size):
@@ -76,12 +72,18 @@ def local_thresholding_wdg(image, block_size):
             y_end = min(i + block_size, h)
             x_end = min(j + block_size, w)
 
-            block = image[i:y_end, j:x_end]  #
+            block = image[i:y_end, j:x_end]
 
-            threshold = skimage.filters.threshold_otsu(block)
+            # Kontrast berechnen
+            block_contrast = block.max() - block.min()
 
-            binary_block = (block > threshold).astype(np.uint8) * 255
-            result[i:y_end, j:x_end] = binary_block
+            if block_contrast < contrast_threshold:
+                # Geringer Kontrast → Block weiß einfärben
+                result[i:y_end, j:x_end] = 255
+            else:
+                threshold = skimage.filters.threshold_otsu(block)
+                binary_block = (block > threshold).astype(np.uint8) * 255
+                result[i:y_end, j:x_end] = binary_block
 
     return result
 
