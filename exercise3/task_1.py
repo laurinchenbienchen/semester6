@@ -6,6 +6,8 @@ import matplotlib.pyplot as plt
 from skimage import io
 
 
+
+
 # region identification mit floodfill
 # eingabe bereits binäres bild, durch thresholding erzeugt
 # vordergrundpixel = 255, hintergrundpixel = 0
@@ -47,7 +49,7 @@ def label2rgb(label_img):
     num_labels = label_img.max()
     np.random.seed(0)
 
-    for label in range(2, num_labels + 1):  # Label startet bei 2
+    for label in range(3, num_labels + 1):  # Label startet bei 2
         color = np.random.randint(0, 255, size=3)
         out[label_img == label] = color
 
