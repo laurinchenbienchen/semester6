@@ -1,11 +1,7 @@
 import numpy as np
-import matplotlib.pyplot as plt
-import skimage
-from skimage.color import label2rgb as sk_label2rgb
-import cv2
 from skimage import io
 import os
-import sys
+
 
 BASE_DIRECTORY = '/Users/laurinerichlitzki/laurinesrepository/semester6/img'
 
