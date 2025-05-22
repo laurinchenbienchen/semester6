@@ -44,3 +44,18 @@ tensor = torch.rand(3,4)
 print(f"Shape of tensor: {tensor.shape}")
 print(f"Datatype of tensor: {tensor.dtype}")
 print(f"Device tensor is stored on: {tensor.device}")
+
+# operations on tensors
+# Over 1200 tensor operations, including arithmetic, linear algebra, matrix manipulation (transposing,
+# indexing, slicing), sampling
+
+# By default, tensors are created on the CPU. We need to explicitly move tensors to the accelerator using
+# ``.to`` method (after checking for accelerator availability). Keep in mind that copying large tensors
+# across devices can be expensive in terms of time and memory!
+
+# moving tensor to the current accelerator if available
+if torch.accelerator.is_available():
+    tensor = tensor.to(torch.accelerator.current_accelerator())
+    print()
+    print("Using torch", torch.__version__)
+    print(f"Device tensor is stored on: {tensor.device}")
